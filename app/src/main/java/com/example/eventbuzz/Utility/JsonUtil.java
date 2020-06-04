@@ -61,8 +61,6 @@ public class JsonUtil {
                     //Creating Object URL
                     eventPojoArrayList.add(eventPojo);
 
-
-
                 }
                 return eventPojoArrayList;
             } catch (JSONException e) {

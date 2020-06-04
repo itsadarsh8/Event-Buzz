@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewAdapter = new RecyclerViewAdapter();
+        recyclerViewAdapter = new RecyclerViewAdapter(this);
         recyclerView.setAdapter(recyclerViewAdapter);
         mAsyncTask = new MyAsyncTask();
 

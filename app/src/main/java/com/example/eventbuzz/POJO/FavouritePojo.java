@@ -9,26 +9,20 @@ public class FavouritePojo {
 
     @PrimaryKey(autoGenerate = true)
     private int mId;
-
     private String mName;
     private String mStartDate;
     private String mEndDate;
     private String mImageUrl;
 
-    public FavouritePojo(int id, String name, String startDate, String endDate, String imageUrl) {
-        mId = id;
+    public FavouritePojo( String name, String startDate, String endDate, String imageUrl) {
         mName = name;
         mStartDate = startDate;
         mEndDate = endDate;
         mImageUrl = imageUrl;
     }
 
-    @Ignore
-    public FavouritePojo(String name, String startDate, String endDate, String imageUrl) {
-        mName = name;
-        mStartDate = startDate;
-        mEndDate = endDate;
-        mImageUrl = imageUrl;
+    public void setId(int id) {
+        mId = id;
     }
 
     public int getId() {

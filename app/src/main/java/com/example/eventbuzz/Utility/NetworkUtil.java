@@ -88,7 +88,6 @@ public class NetworkUtil {
                 line = reader.readLine();
             }
         }
-        Log.i("zz",output.toString());
         return output.toString();
     }
 }
