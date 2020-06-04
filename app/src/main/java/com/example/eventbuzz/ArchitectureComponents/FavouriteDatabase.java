@@ -52,9 +52,9 @@ public abstract class FavouriteDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            favouriteDao.insert(new FavouritePojo("Title 1", "2019-12-08", "2019-12-07", "url1"));
-            favouriteDao.insert(new FavouritePojo("Title 2", "2019-12-09", "2019-12-08", "url2"));
-            favouriteDao.insert(new FavouritePojo("Title 3", "2019-12-07", "2019-12-09", "url3"));
+            favouriteDao.insert(new FavouritePojo("Title 1", "2019-12-08", "2019-12-07", "url1","url4"));
+            favouriteDao.insert(new FavouritePojo("Title 2", "2019-12-09", "2019-12-08", "url2","url5"));
+            favouriteDao.insert(new FavouritePojo("Title 3", "2019-12-07", "2019-12-09", "url3","url6"));
 
             return null;
         }

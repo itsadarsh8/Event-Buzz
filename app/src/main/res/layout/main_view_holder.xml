@@ -41,7 +41,7 @@
                     android:padding="8dp"
                     android:textColor="@color/white"
                     android:textSize="22sp"
-                    tools:text="I am a very beautiful concert" />
+                    tools:text="@string/title" />
 
             </FrameLayout>
 
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="Start Date:"
+                    android:text="@string/start_date"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -67,7 +67,6 @@
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     tools:text="2020/02/22" />
 
             </LinearLayout>
@@ -82,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="End Date:"
+                    android:text="@string/end_date"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -94,7 +93,6 @@
                     android:layout_marginLeft="13dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     tools:text="2020/02/23" />
 
             </LinearLayout>

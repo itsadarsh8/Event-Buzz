@@ -13,12 +13,14 @@ public class FavouritePojo {
     private String mStartDate;
     private String mEndDate;
     private String mImageUrl;
+    private String mContextUrl;
 
-    public FavouritePojo( String name, String startDate, String endDate, String imageUrl) {
+    public FavouritePojo( String name, String startDate, String endDate, String imageUrl, String contextUrl) {
         mName = name;
         mStartDate = startDate;
         mEndDate = endDate;
         mImageUrl = imageUrl;
+        mContextUrl=contextUrl;
     }
 
     public void setId(int id) {
@@ -27,6 +29,10 @@ public class FavouritePojo {
 
     public int getId() {
         return mId;
+    }
+
+    public String getContextUrl() {
+        return mContextUrl;
     }
 
     public String getName() {

@@ -56,9 +56,9 @@ public class JsonUtil {
                     String imageUrl=imageObject.getString("url");
 
                     //Creating Object
-                    EventPojo eventPojo =new EventPojo(concertName,startDate,endDate,imageUrl);
+                    EventPojo eventPojo =new EventPojo(concertName,startDate,endDate,imageUrl,concertUrl);
 
-                    //Creating Object URL
+                    //Creating Object Array
                     eventPojoArrayList.add(eventPojo);
 
                 }

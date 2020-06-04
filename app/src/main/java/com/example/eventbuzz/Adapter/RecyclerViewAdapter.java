@@ -1,7 +1,12 @@
 package com.example.eventbuzz.Adapter;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +34,15 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     ArrayList<EventPojo> mEventPojoArrayList =new ArrayList<>();
-    List<FavouritePojo> allFavouriteList;
     FavouriteViewModel favouriteViewModel;
     Activity mActivity;
+    Context mContext;
+    Application mApplication;
 
-    public RecyclerViewAdapter(Activity activity) {
+    public RecyclerViewAdapter(Activity activity,Context context, Application application) {
         mActivity = activity;
+        mContext=context;
+        mApplication=application;
     }
 
     @NonNull
@@ -59,27 +67,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         mEventPojoArrayList.get(position).getConcertName(),
                         mEventPojoArrayList.get(position).getStartDate(),
                         mEventPojoArrayList.get(position).getEndDate(),
-                        mEventPojoArrayList.get(position).getImageUrl());
+                        mEventPojoArrayList.get(position).getImageUrl(),
+                        mEventPojoArrayList.get(position).getConcertUrl());
 
                 if(favouritePojo!=null) {
-                    //App crashing here
+                    favouriteViewModel= new FavouriteViewModel(mApplication);
                     favouriteViewModel.insert(favouritePojo);
-                    favouriteViewModel = ViewModelProviders.of((FragmentActivity) mActivity).get(FavouriteViewModel.class);
-                    favouriteViewModel.getAllFavourites().observe((LifecycleOwner) mActivity, new Observer<List<FavouritePojo>>() {
-                        @Override
-                        public void onChanged(List<FavouritePojo> favouritePojosList) {
-                            allFavouriteList = favouritePojosList;
-                        }
-                    });
                 }
 
-
-
-                Toast.makeText(mActivity.getApplicationContext(),"Added to fav",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(),"Added to favourite",Toast.LENGTH_SHORT).show();
             }
-
-
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String concertUrl=mEventPojoArrayList.get(position).getConcertUrl();
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concertUrl));
+                try {
+                    mContext.startActivity(webIntent);
+                } catch (ActivityNotFoundException ex) {
+                    mContext.startActivity(webIntent);
+                }
+            }
+        });
+
+
     }
 
     @Override
