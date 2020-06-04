@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Event Buzz</string>
+
+    <string name="US_Link">https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&amp;countryCode=US&amp;apikey=RYQTJIEd0LVptKwn84dBVcHuUebWvXXh</string>
+</resources>
