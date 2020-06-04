@@ -3,6 +3,7 @@ package com.example.eventbuzz.Utility;
 import android.util.Log;
 
 import com.example.eventbuzz.POJO.EventPojo;
+import com.example.eventbuzz.POJO.FavouritePojo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +19,7 @@ public class JsonUtil {
     private JsonUtil(){}
 
     public static ArrayList<EventPojo> extractFeaturesFromJson(String json){
-        ArrayList<EventPojo> eventPojoArrayList=new ArrayList<>();
+        ArrayList<EventPojo> eventPojoArrayList =new ArrayList<>();
 
         if(json==null){
             Log.e(LOG_Error,"ExtractFeaturesFromJson- input json is null");
@@ -55,14 +56,15 @@ public class JsonUtil {
                     String imageUrl=imageObject.getString("url");
 
                     //Creating Object
-                    EventPojo eventPojo=new EventPojo(concertName,startDate,endDate,imageUrl);
+                    EventPojo eventPojo =new EventPojo(concertName,startDate,endDate,imageUrl);
 
                     //Creating Object URL
                     eventPojoArrayList.add(eventPojo);
 
-                    return eventPojoArrayList;
+
 
                 }
+                return eventPojoArrayList;
             } catch (JSONException e) {
                 Log.e(LOG_Error,"ExtractFeaturesFromJson- "+e);
             }

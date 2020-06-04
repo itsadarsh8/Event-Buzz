@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="United States"
+        android:id="@+id/us"
+        android:orderInCategory="1"
+        />
+    <item
+        android:title="Germany"
+        android:id="@+id/germany"
+        android:orderInCategory="2"
+        />
+
+    <item
+        android:title="Canada"
+        android:id="@+id/canada"
+        android:orderInCategory="3"
+        />
+
+    <item
+        android:title="My Favourite"
+        android:id="@+id/favourite"
+        android:orderInCategory="3"
+        />
+
+
+</menu>

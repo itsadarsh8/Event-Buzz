@@ -2,4 +2,6 @@
     <string name="app_name">Event Buzz</string>
 
     <string name="US_Link">https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&amp;countryCode=US&amp;apikey=RYQTJIEd0LVptKwn84dBVcHuUebWvXXh</string>
+    <string name="Canada_Link">https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&amp;countryCode=CA&amp;apikey=RYQTJIEd0LVptKwn84dBVcHuUebWvXXh</string>
+    <string name="Germany_Link">https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&amp;countryCode=DE&amp;apikey=RYQTJIEd0LVptKwn84dBVcHuUebWvXXh</string>
 </resources>

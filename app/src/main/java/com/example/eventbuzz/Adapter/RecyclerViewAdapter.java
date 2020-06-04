@@ -10,13 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventbuzz.POJO.EventPojo;
+import com.example.eventbuzz.POJO.FavouritePojo;
 import com.example.eventbuzz.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-    ArrayList<EventPojo> mEventPojoArrayList=new ArrayList<>();
+    ArrayList<EventPojo> mEventPojoArrayList =new ArrayList<>();
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void updateEventList(ArrayList<EventPojo> eventPojoArrayList){
-        mEventPojoArrayList=eventPojoArrayList;
+        mEventPojoArrayList = eventPojoArrayList;
         notifyDataSetChanged();
     }
 
