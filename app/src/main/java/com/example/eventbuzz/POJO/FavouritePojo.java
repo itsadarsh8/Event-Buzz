@@ -1,7 +1,6 @@
 package com.example.eventbuzz.POJO;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "favourite_table")
@@ -9,18 +8,18 @@ public class FavouritePojo {
 
     @PrimaryKey(autoGenerate = true)
     private int mId;
-    private String mName;
-    private String mStartDate;
-    private String mEndDate;
-    private String mImageUrl;
-    private String mContextUrl;
+    private final String mName;
+    private final String mStartDate;
+    private final String mEndDate;
+    private final String mImageUrl;
+    private final String mContextUrl;
 
-    public FavouritePojo( String name, String startDate, String endDate, String imageUrl, String contextUrl) {
+    public FavouritePojo(String name, String startDate, String endDate, String imageUrl, String contextUrl) {
         mName = name;
         mStartDate = startDate;
         mEndDate = endDate;
         mImageUrl = imageUrl;
-        mContextUrl=contextUrl;
+        mContextUrl = contextUrl;
     }
 
     public void setId(int id) {
@@ -38,6 +37,7 @@ public class FavouritePojo {
     public String getName() {
         return mName;
     }
+
     public String getStartDate() {
         return mStartDate;
     }

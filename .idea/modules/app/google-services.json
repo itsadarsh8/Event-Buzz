@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1039081708240",
+    "firebase_url": "https://event-buzz-540fc.firebaseio.com",
+    "project_id": "event-buzz-540fc",
+    "storage_bucket": "event-buzz-540fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039081708240:android:915b00f59642d7c3f95cd5",
+        "android_client_info": {
+          "package_name": "com.example.eventbuzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039081708240-9h0qai4gqeqh87oasopb9c59ru3utqdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eventbuzz",
+            "certificate_hash": "316f8cee707c561153a2444e74a5bdcf3cdd4064"
+          }
+        },
+        {
+          "client_id": "1039081708240-r81rc6fabohinmcsgmjlfg3u2vtjrtav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcLJA9Lq5DzPN3uKQ8Mq0oBS77EgSJpsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039081708240-r81rc6fabohinmcsgmjlfg3u2vtjrtav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

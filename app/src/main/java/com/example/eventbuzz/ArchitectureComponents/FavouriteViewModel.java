@@ -11,8 +11,8 @@ import java.util.List;
 
 public class FavouriteViewModel extends AndroidViewModel {
 
-    private FavouriteRepository mFavouriteRepository;
-    private LiveData<List<FavouritePojo>> mAllFavourites;
+    private final FavouriteRepository mFavouriteRepository;
+    private final LiveData<List<FavouritePojo>> mAllFavourites;
 
     public FavouriteViewModel(Application application) {
         super(application);

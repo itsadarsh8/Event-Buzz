@@ -1,5 +1,6 @@
 package com.example.eventbuzz.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,7 @@ import java.util.List;
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.favouriteViewHolder> {
 
     private List<FavouritePojo> list = new ArrayList<>();
-    private Context mContext;
+    private final Context mContext;
 
     public FavouriteAdapter(Context context) {
         mContext = context;
@@ -47,10 +48,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.favo
         holder.endDate.setText(list.get(position).getEndDate());
         Picasso.get().load(list.get(position).getImageUrl()).into(holder.imageView);
 
+        holder.concertName.setContentDescription(list.get(position).getName());
+        holder.startDate.setContentDescription(list.get(position).getStartDate());
+        holder.endDate.setContentDescription(list.get(position).getEndDate());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String concertUrl=list.get(position).getContextUrl();
+                String concertUrl = list.get(position).getContextUrl();
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concertUrl));
                 try {
                     mContext.startActivity(webIntent);
@@ -67,28 +72,30 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.favo
     }
 
 
-    public void updateEventList(List<FavouritePojo> eventPojoArrayList){
+    public void updateEventList(List<FavouritePojo> eventPojoArrayList) {
         list = eventPojoArrayList;
         notifyDataSetChanged();
     }
+
     public FavouritePojo getItemAt(int position) {
         return list.get(position);
     }
 
-    public class favouriteViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView concertName;
-        TextView startDate;
-        TextView endDate;
-        FloatingActionButton fab;
+    public static class favouriteViewHolder extends RecyclerView.ViewHolder {
+        final ImageView imageView;
+        final TextView concertName;
+        final TextView startDate;
+        final TextView endDate;
+        final FloatingActionButton fab;
 
+        @SuppressLint("RestrictedApi")
         public favouriteViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.imageView);
-            concertName=itemView.findViewById(R.id.concertTitle);
-            startDate=itemView.findViewById(R.id.startDate);
-            endDate=itemView.findViewById(R.id.endDate);
-            fab=itemView.findViewById(R.id.fab);
+            imageView = itemView.findViewById(R.id.imageView);
+            concertName = itemView.findViewById(R.id.concertTitle);
+            startDate = itemView.findViewById(R.id.startDate);
+            endDate = itemView.findViewById(R.id.endDate);
+            fab = itemView.findViewById(R.id.fab);
             fab.setVisibility(View.INVISIBLE);
         }
 

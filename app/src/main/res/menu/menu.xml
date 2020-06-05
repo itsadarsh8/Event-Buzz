@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="United States"
+        android:title="@string/usa"
         android:id="@+id/us"
         android:orderInCategory="1"
         />
     <item
-        android:title="Germany"
+        android:title="@string/germany"
         android:id="@+id/germany"
         android:orderInCategory="2"
         />
 
     <item
-        android:title="Canada"
+        android:title="@string/canada"
         android:id="@+id/canada"
         android:orderInCategory="3"
         />
 
     <item
-        android:title="My Favourite"
+        android:title="@string/my_fav"
         android:id="@+id/favourite"
         android:orderInCategory="3"
         />

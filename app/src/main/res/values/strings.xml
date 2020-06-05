@@ -11,7 +11,12 @@
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
     <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="your_fav">Your Saved Events</string>
+    <string name="image_description">The Image is poster of event </string>
+    <string name="fab_description">Click on this button to save this event in your favourites</string>
+
+    <string name="usa">United States</string>
+    <string name="canada">Canada</string>
+    <string name="germany">Germany</string>
+    <string name="my_fav">My Favourite</string>
 
 </resources>

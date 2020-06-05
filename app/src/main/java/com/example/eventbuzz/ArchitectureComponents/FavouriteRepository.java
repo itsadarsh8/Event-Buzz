@@ -10,8 +10,8 @@ import com.example.eventbuzz.POJO.FavouritePojo;
 import java.util.List;
 
 public class FavouriteRepository {
-    private FavouriteDao mFavouriteDao;
-    private LiveData<List<FavouritePojo>> mAllFavourites;
+    private final FavouriteDao mFavouriteDao;
+    private final LiveData<List<FavouritePojo>> mAllFavourites;
 
     public FavouriteRepository(Application application) {
         FavouriteDatabase favouriteDatabase = FavouriteDatabase.getInstance(application);
@@ -32,9 +32,8 @@ public class FavouriteRepository {
     }
 
 
-
     private static class insertAsyncTask extends AsyncTask<FavouritePojo, Void, Void> {
-        FavouriteDao cFavouriteDao;
+        final FavouriteDao cFavouriteDao;
 
         public insertAsyncTask(FavouriteDao favouriteDao) {
             cFavouriteDao = favouriteDao;
@@ -48,7 +47,7 @@ public class FavouriteRepository {
     }
 
     private static class deleteAsyncTask extends AsyncTask<FavouritePojo, Void, Void> {
-        FavouriteDao cFavouriteDao;
+        final FavouriteDao cFavouriteDao;
 
         public deleteAsyncTask(FavouriteDao favouriteDao) {
             cFavouriteDao = favouriteDao;
