@@ -19,4 +19,7 @@
     <string name="germany">Germany</string>
     <string name="my_fav">My Favourite</string>
 
+    <string name="saved_fav">Saved to your favourites</string>
+    <string name="removed_fav">Removed from your Favourites</string>
+
 </resources>

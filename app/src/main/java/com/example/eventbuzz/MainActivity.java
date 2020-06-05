@@ -16,8 +16,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static RecyclerView recyclerView;
     private FavouriteViewModel favouriteViewModel;
     private FirebaseAnalytics mFirebaseAnalytics;
+    private int flag = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         mAsyncTask = new MyAsyncTask();
         favouriteViewModel = new FavouriteViewModel(this.getApplication());
 
-
         toolbar.inflateMenu(R.menu.menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -75,15 +73,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (getNetworkStatus()) {
-            mAsyncTask.execute(getResources().getString(R.string.US_Link));
-        }
 
         AdView adView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (savedInstanceState != null) {
+            flag = savedInstanceState.getInt("CURRENT_ADAPTER");
+        }
+        switch (flag) {
+            case 1:
+                if (getNetworkStatus()) {
+                    setUSAdapter();
+                    break;
+                }
+            case 2:
+                if (getNetworkStatus()) {
+                    setGermanyAdapter();
+                    break;
+                }
+            case 3:
+                if (getNetworkStatus()) {
+                    setCanadaAdapter();
+                    break;
+                }
+            case 4: {
+                setFavouriteAdapter();
+                break;
+            }
+
+            default:
+                setFavouriteAdapter();
+        }
+
+        recyclerViewAdapter.setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
 
     }
 
@@ -105,54 +128,76 @@ public class MainActivity extends AppCompatActivity {
         int itemClicked = item.getItemId();
 
         if (itemClicked == R.id.favourite) {
-            recyclerView = findViewById(R.id.recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            setFavouriteAdapter();
 
-            recyclerView.setAdapter(favouriteAdapter);
-            favouriteViewModel = ViewModelProviders.of(this).get(FavouriteViewModel.class);
-            favouriteViewModel.getAllFavourites().observe(this, new Observer<List<FavouritePojo>>() {
-                @Override
-                public void onChanged(List<FavouritePojo> favouritePojos) {
-                    favouriteAdapter.updateEventList(favouritePojos);
-                    Log.i(LOG_VALUE, "RecyclerView Updated");
-                }
-            });
-
-            deleteItemOnSwipe();
-
-            Bundle bundle = new Bundle();
-            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
-            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Favourite");
-            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         }
 
         if (getNetworkStatus()) {
             if (itemClicked == R.id.canada) {
-                mAsyncTask = new MyAsyncTask();
-                mAsyncTask.execute(getResources().getString(R.string.Canada_Link));
-
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "2");
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Canada");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                setCanadaAdapter();
             } else if (itemClicked == R.id.germany) {
-                mAsyncTask = new MyAsyncTask();
-                mAsyncTask.execute(getResources().getString(R.string.Germany_Link));
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "3");
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Germany");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                setGermanyAdapter();
             } else if (itemClicked == R.id.us) {
-                mAsyncTask = new MyAsyncTask();
-                mAsyncTask.execute(getResources().getString(R.string.US_Link));
-
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "4");
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "US");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                setUSAdapter();
             }
         }
 
+    }
+
+    private void setUSAdapter() {
+        mAsyncTask = new MyAsyncTask();
+        mAsyncTask.execute(getResources().getString(R.string.US_Link));
+        flag = 1;
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "4");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "US");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    private void setGermanyAdapter() {
+        mAsyncTask = new MyAsyncTask();
+        mAsyncTask.execute(getResources().getString(R.string.Germany_Link));
+        flag = 2;
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "3");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Germany");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    private void setCanadaAdapter() {
+        mAsyncTask = new MyAsyncTask();
+        mAsyncTask.execute(getResources().getString(R.string.Canada_Link));
+        flag = 3;
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "2");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Canada");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    private void setFavouriteAdapter() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+        recyclerView.setAdapter(favouriteAdapter);
+        flag = 4;
+        favouriteViewModel = ViewModelProviders.of(this).get(FavouriteViewModel.class);
+        favouriteViewModel.getAllFavourites().observe(this, new Observer<List<FavouritePojo>>() {
+            @Override
+            public void onChanged(List<FavouritePojo> favouritePojos) {
+                favouriteAdapter.updateEventList(favouritePojos);
+                Log.i(LOG_VALUE, "RecyclerView Updated");
+            }
+        });
+
+        deleteItemOnSwipe();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Favourite");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     private void deleteItemOnSwipe() {
@@ -166,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
                 favouriteViewModel.delete(favouriteAdapter.getItemAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "removed from favourites", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.removed_fav), Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
     }
@@ -185,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<EventPojo> eventPojoArrayList = JsonUtil.extractFeaturesFromJson(json);
             recyclerViewAdapter.updateEventList(eventPojoArrayList);
             recyclerView.setAdapter(recyclerViewAdapter);
+
             Log.i(LOG_VALUE, "RecyclerView Updated");
             super.onPostExecute(json);
         }
@@ -209,6 +255,23 @@ public class MainActivity extends AppCompatActivity {
         int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), FavShowWidget.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
+
+        recyclerViewAdapter.setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.ALLOW);
+
     }
-    
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("CURRENT_ADAPTER", flag);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        flag = savedInstanceState.getInt("CURRENT_ADAPTER");
+    }
 }

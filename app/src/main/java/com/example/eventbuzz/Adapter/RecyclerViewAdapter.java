@@ -70,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 favouriteViewModel = new FavouriteViewModel(mApplication);
                 favouriteViewModel.insert(favouritePojo);
 
-                Toast.makeText(mActivity.getApplicationContext(), "Added to favourite", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), mContext.getResources().getString(R.string.saved_fav), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,9 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
-
     }
-
     @Override
     public int getItemCount() {
         return mEventPojoArrayList.size();
